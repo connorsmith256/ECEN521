@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/mj/randSamples/rand10000000.csv"
+            argument = "/Users/mj/Code/ECEN521/DP1/test_data/p100000.txt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

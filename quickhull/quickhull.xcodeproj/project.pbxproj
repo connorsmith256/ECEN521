@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2DD23F721BC4D49100A608C4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DD23F711BC4D49100A608C4 /* main.cpp */; };
+		2D6CE0E31BCC540200A62AB9 /* dp1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D6CE0E21BCC540200A62AB9 /* dp1.cpp */; settings = {ASSET_TAGS = (); }; };
 		2DD23F811BC4D4A100A608C4 /* convex_hull.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DD23F781BC4D4A100A608C4 /* convex_hull.cpp */; settings = {ASSET_TAGS = (); }; };
 		2DD23F821BC4D4A100A608C4 /* Coordinates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DD23F7A1BC4D4A100A608C4 /* Coordinates.cpp */; settings = {ASSET_TAGS = (); }; };
 		2DD23F841BC4D4A100A608C4 /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DD23F7D1BC4D4A100A608C4 /* Line.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -27,8 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2D6CE0E21BCC540200A62AB9 /* dp1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dp1.cpp; path = ../../DP1/src/dp1.cpp; sourceTree = "<group>"; };
 		2DD23F6E1BC4D49100A608C4 /* quickhull */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = quickhull; sourceTree = BUILT_PRODUCTS_DIR; };
-		2DD23F711BC4D49100A608C4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2DD23F781BC4D4A100A608C4 /* convex_hull.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convex_hull.cpp; path = ../../DP1/src/convex_hull.cpp; sourceTree = "<group>"; };
 		2DD23F791BC4D4A100A608C4 /* convex_hull.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = convex_hull.hpp; path = ../../DP1/src/convex_hull.hpp; sourceTree = "<group>"; };
 		2DD23F7A1BC4D4A100A608C4 /* Coordinates.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Coordinates.cpp; path = ../../DP1/src/Coordinates.cpp; sourceTree = "<group>"; };
@@ -69,6 +69,7 @@
 		2DD23F701BC4D49100A608C4 /* quickhull */ = {
 			isa = PBXGroup;
 			children = (
+				2D6CE0E21BCC540200A62AB9 /* dp1.cpp */,
 				2DD23F781BC4D4A100A608C4 /* convex_hull.cpp */,
 				2DD23F791BC4D4A100A608C4 /* convex_hull.hpp */,
 				2DD23F7A1BC4D4A100A608C4 /* Coordinates.cpp */,
@@ -77,7 +78,6 @@
 				2DD23F7E1BC4D4A100A608C4 /* Line.hpp */,
 				2DD23F7F1BC4D4A100A608C4 /* Triangle.cpp */,
 				2DD23F801BC4D4A100A608C4 /* Triangle.hpp */,
-				2DD23F711BC4D49100A608C4 /* main.cpp */,
 			);
 			path = quickhull;
 			sourceTree = "<group>";
@@ -140,7 +140,7 @@
 			files = (
 				2DD23F821BC4D4A100A608C4 /* Coordinates.cpp in Sources */,
 				2DD23F851BC4D4A100A608C4 /* Triangle.cpp in Sources */,
-				2DD23F721BC4D49100A608C4 /* main.cpp in Sources */,
+				2D6CE0E31BCC540200A62AB9 /* dp1.cpp in Sources */,
 				2DD23F811BC4D4A100A608C4 /* convex_hull.cpp in Sources */,
 				2DD23F841BC4D4A100A608C4 /* Line.cpp in Sources */,
 			);
@@ -259,6 +259,7 @@
 				2DD23F771BC4D49100A608C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
