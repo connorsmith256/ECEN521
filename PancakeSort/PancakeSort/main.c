@@ -14,13 +14,13 @@ int main(int argc, const char * argv[]) {
 	
 	if (argc < 2)
 	{
-		cout << "Error: no input file specified." << endl;
+		printf("Error: no input file specified.\n");
 		return 1;
 	}
 	
 	FILE* f = fopen(argv[1], "r");
 	if (f == NULL) {
-		cout << "Unable to open file!\n";
+		printf("Unable to open file!\n");
 		return 1;
 	}
 	
