@@ -8,11 +8,18 @@
 #include<string>
 #include<vector>
 #include <stdio.h>
+#include <sys/time.h>
 
 #include "Coordinates.hpp"
 #include "convex_hull.hpp"
 
 using namespace std;
+
+double get_current_time() {
+	struct timeval tp;
+	gettimeofday(&tp, NULL);
+	return ((double) tp.tv_sec + (double) tp.tv_usec * 1e-6);
+}
 
 int main(int argc, char* argv[])
 {
@@ -40,11 +47,17 @@ int main(int argc, char* argv[])
 	}
 
 	Convex_Hull hull(point_list, point_count);
+	
+	double start = get_current_time();
 	hull.ComputeHull();
+	double end = get_current_time();
+	printf("%lf\n",end-start);
+	
 	hull.PrintHullList();
 
 	return 0;
 }
+
 
 
 
