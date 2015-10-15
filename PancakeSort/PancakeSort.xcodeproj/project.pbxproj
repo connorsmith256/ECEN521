@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D208F751BD02A83000AA519 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D208F741BD02A83000AA519 /* main.c */; };
+		2D208F7D1BD02D94000AA519 /* PancakeSort.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D208F7B1BD02D94000AA519 /* PancakeSort.c */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		2D208F711BD02A83000AA519 /* PancakeSort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PancakeSort; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D208F741BD02A83000AA519 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		2D208F7B1BD02D94000AA519 /* PancakeSort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PancakeSort.c; sourceTree = "<group>"; };
+		2D208F7C1BD02D94000AA519 /* PancakeSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PancakeSort.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				2D208F741BD02A83000AA519 /* main.c */,
+				2D208F7B1BD02D94000AA519 /* PancakeSort.c */,
+				2D208F7C1BD02D94000AA519 /* PancakeSort.h */,
 			);
 			path = PancakeSort;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D208F751BD02A83000AA519 /* main.c in Sources */,
+				2D208F7D1BD02D94000AA519 /* PancakeSort.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
