@@ -12,13 +12,14 @@ void Flip_i(int index, int* pancakeStack, int size)
 {
 	//int* pancakeStack point to top of Pancakes (Left)
 	Swap(pancakeStack,(size-index+1)) //We want to include the index hence the +1
+	
 }
 
 void Swap(int* pancakeStack, int size)
 {
 	int *end = &pancakeStack[size -1]]; 
 	int swapTemp;
-	
+	printf("%d ",size); //Prints the flip target
 	for(int i=0; i<size/2; i++){
 		swapTemp = pancakeStack[i];
 		pancakeStack[i] = end[-i];
@@ -26,7 +27,7 @@ void Swap(int* pancakeStack, int size)
 	}
 }
 //PancakeIndex(TM) is a patented form of indexing that indexes from the bottom of a Pancake Stack to the top.
-FindMax(int* pancakeStack, int size){ //Returns the PancakeIndex(TM) of the largest value
+int FindMax(int* pancakeStack, int size){ //Returns the PancakeIndex(TM) of the largest value
 	int = tempLargest = 0;
 	int = index = -1;
 	for(int i=0; i<size; i++){
@@ -35,4 +36,10 @@ FindMax(int* pancakeStack, int size){ //Returns the PancakeIndex(TM) of the larg
 			index = i;
 	}
 	return (size - index);
+}
+
+void PancakeSort(int* pancakeStack, int size){
+	for(int i = 0; i < size ; i++){
+		flip(index, pancakeStack, findMax(pancakeStack, size));
+	}
 }
