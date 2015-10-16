@@ -11,10 +11,11 @@
 
 #include <stdio.h>
 
-void Flip_i(int index);
+void Flip_i(int index, int* pancakeStack, int size);
+void Swap(int* pancakeStack, int size);
 
-FindMax();
+FindMax(int* pancakeStack, int size);
 
-PancakeSort();
+PancakeSort(int* pancakeStack, int size);
 
 #endif /* PancakeSort_h */
