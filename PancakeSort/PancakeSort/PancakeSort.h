@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 
-void Flip_i(int index, int* pancakeStack, int size);
+void Flip(int index, int* pancakeStack, int size);
 void Swap(int* pancakeStack, int size);
 
 int FindMaxIndex(int* pancakeStack, int size);
