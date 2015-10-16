@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 void Flip(int index, int* pancakeStack, int size);
-void Swap(int* pancakeStack, int size);
+void Swap(int* pancakeStack, int index, int size);
 
 int FindMaxIndex(int* pancakeStack, int size);
 

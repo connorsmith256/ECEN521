@@ -69,7 +69,7 @@ void ReadLine(char* line)
 {
 	long int output;
 	int index = 1;
-	
+	printf("%s\n",line);
 	while(1)
 	{
 		char* nextNum = line;
