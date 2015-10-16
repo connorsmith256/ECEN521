@@ -14,7 +14,7 @@
 void Flip_i(int index, int* pancakeStack, int size);
 void Swap(int* pancakeStack, int size);
 
-int FindMax(int* pancakeStack, int size);
+int FindMaxIndex(int* pancakeStack, int size);
 
 void PancakeSort(int* pancakeStack, int size);
 
