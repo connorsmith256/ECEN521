@@ -8,8 +8,6 @@
 
 #include "PancakeSort.h"
 
-int originalSize = 0;
-
 void Swap(int pancakeStack[], int index1, int index2) {
 	int temp = pancakeStack[index1];
 	pancakeStack[index1] = pancakeStack[index2];
