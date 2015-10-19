@@ -15,7 +15,7 @@ void Swap(int pancakeStack[], int index1, int index2) {
 }
 
 void Flip(int pancakeStack[], int size, int endIndex) {
-	printf("%d ", (size+1-endIndex));
+	printf("%d ", (size-endIndex));
 	for (int i = 0, j = endIndex; i < j; i++, j--) {
 		Swap(pancakeStack, i, j);
 	}
@@ -42,10 +42,10 @@ void PancakeSort(int pancakeStack[], int size){
 		maxIndex = FindMaxIndex(pancakeStack, i);
 		if (maxIndex != i) { //Not in right spot
 			if (maxIndex != 0) {
-				Flip(pancakeStack, i, maxIndex);
+				Flip(pancakeStack, size, maxIndex);
 				num_flips++;
 			}
-			Flip(pancakeStack, i, i);
+			Flip(pancakeStack, size, i);
 			num_flips++;
 		}
 	}
