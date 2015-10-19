@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_SIZE 100
+#define MAX_SIZE 200
 //Holds the pointer to our dynamically allocated array.
 int inputArray[MAX_SIZE];
 
