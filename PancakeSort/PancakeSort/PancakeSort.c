@@ -7,6 +7,7 @@
 //
 
 #include "PancakeSort.h"
+extern int verbose;
 
 void Swap(int pancakeStack[], int index1, int index2) {
 	int temp = pancakeStack[index1];
@@ -51,7 +52,8 @@ void PancakeSort(int pancakeStack[], int size){
 	}
 	printf("0 (%d)\n", num_flips);
 
-	// PrintStack(pancakeStack, size);
+	if (verbose)
+		PrintStack(pancakeStack, size);
 }
 
 void PrintStack(int pancakeStack[], int size) {

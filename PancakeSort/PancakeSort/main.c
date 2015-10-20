@@ -9,21 +9,41 @@
 #include "PancakeSort.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_SIZE 200
+#define TRUE 1;
+#define FALSE 0;
+
 //Holds the pointer to our dynamically allocated array.
 int inputArray[MAX_SIZE];
+int verbose;
 
 void ReadFile(FILE* f);
 void ReadLine(char* line);
 
 int main(int argc, const char* argv[]) {
+	verbose = FALSE;
 	if (argc < 2)
 	{
 		printf("Error: no input file specified.\n");
 		return 1;
 	}
-
+	
+	if (argc >= 3)
+	{
+		for(int i = 1; i < argc; i++)
+		{
+			printf("%s\n",argv[i]);
+			if (strcmp(argv[i],"-v"))
+			{
+				printf("Verbose mode active!\n");
+				verbose = TRUE;
+			}
+		}
+	}
+	
+	
 	FILE* f = fopen(argv[1], "r");
 	if (f == NULL) {
 		printf("Unable to open file!\n");
