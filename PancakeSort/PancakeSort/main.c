@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/time.h>
 
 #define MAX_SIZE 200
 #define TRUE 1;
@@ -21,6 +22,12 @@ int verbose;
 
 void ReadFile(FILE* f);
 void ReadLine(char* line);
+
+double get_current_time() {
+	struct timeval tp;
+	gettimeofday(&tp, NULL);
+	return ((double) tp.tv_sec + (double) tp.tv_usec * 1e-6);
+}
 
 int main(int argc, const char* argv[]) {
 	verbose = FALSE;
@@ -80,5 +87,14 @@ void ReadLine(char* line) {
 	}
 
 	//Call Pancake Sort
+	double start,end;
+	if (verbose)
+		start = get_current_time();
 	PancakeSort(inputArray, size);
+	if (verbose)
+	{
+		end = get_current_time();
+		printf("Time: %lf\n",end-start);
+	}
+	
 }
