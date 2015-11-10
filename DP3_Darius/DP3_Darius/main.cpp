@@ -24,7 +24,7 @@ int main(int argc, const char* argv[]) {
         printf("Error: no input file specified.\n");
         return 1;
     }
-    
+
     if (argc >= 3) {
         for(int i = 1; i < argc; i++) {
             printf("%s\n",argv[i]);
@@ -34,23 +34,23 @@ int main(int argc, const char* argv[]) {
             }
         }
     }
-    
+
     FILE* f = fopen(argv[1], "r");
     if (f == NULL) {
         printf("Unable to open file!\n");
         return 1;
     }
-    
+
     inputLine = 0;
     for(int i = 0; i < MAX_SIZE; i++) {
         for(int k = 0; k < MAX_SIZE; k++) {
             inputArray[i][k] = 0;
         }
     }
-    
+
     ReadFile(f);
     fclose(f);
-    
+
     double start = 0.0,end;
     if (verbose) {
         printf("Diagonalized Matrix\n");
@@ -81,7 +81,7 @@ void ReadFile(FILE* f) {
 void ReadLine(char* line) {
     char input[256];
     int temp;
-    
+
     if (inputLine == 0) {
         sscanf(line,"%d", &numCities);
     }
