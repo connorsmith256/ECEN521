@@ -62,7 +62,11 @@ int main(int argc, const char* argv[]) {
         }
         start = get_current_time();
     }
-    darius();
+    std::pair<std::vector<int>, int> results = darius();
+    for (int i = 0; i < results.first.size(); i++) {
+        printf("%c ", 'A'+results.first.at(i));
+    }
+    printf("(%d)\n", results.second);
     if (verbose) {
         end = get_current_time();
         printf("Time: %lf\n",end-start);
