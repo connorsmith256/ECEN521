@@ -32,6 +32,10 @@ extern int inputArray[MAX_SIZE][MAX_SIZE];
 std::pair<std::vector<int>, int> darius();
 double dRand();
 std::vector<int> getNewCities(std::vector<int>);
+std::vector<int> insertCity(std::vector<int>);
+std::vector<int> removeCity(std::vector<int>);
+std::vector<int> swapCities(std::vector<int>);
+
 int numIllegalCities(std::vector<int> cities);
 int calcSum(std::vector<int> cities);
 int numMissingCities(std::vector<int> cities);

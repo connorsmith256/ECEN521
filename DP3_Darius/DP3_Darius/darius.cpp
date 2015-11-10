@@ -55,33 +55,55 @@ double dRand() {
 }
 
 std::vector<int> getNewCities(std::vector<int> cities) {
-    std::vector<int> newCities(cities.begin(), cities.end());
-    int size = newCities.size();
-    int newCity, position1, position2;
-
-    int method = rand() % 3;
+    long size = cities.size();
+    int method = rand() % 3; //Choose a random move.
     if (size == 0) {
         method = 0;
     }
     switch(method) {
-    case 0:                                                 // add one
-        newCity = rand() % numCities;
-        position1 = (size > 0) ? (rand() % size) : 0;
-        newCities.insert(newCities.begin()+position1, newCity);
-        break;
-    case 1:                                                 // remove one
-        position1 = rand() % size;
-        newCities.erase(newCities.begin()+position1);
-        break;
-    case 2:                                                 // swap two
-        position1 = rand() % size;
-        do {
-            position2 = rand() % newCities.size();
-        } while (position1 == position2);
-        std::iter_swap(newCities.begin()+position1, newCities.begin()+position2);
+		case 0:                                                 // add one
+			return insertCity(cities);
+		case 1:                                                 // remove one
+			return removeCity(cities);
+		case 2:                                                 // swap two
+			return swapCities(cities);
+		default:
+			return cities;
     }
+}
 
-    return newCities;
+std::vector<int> insertCity(std::vector<int> cities)
+{
+	int newCity, position1;
+	long size = cities.size();
+	std::vector<int> newCities(cities); //Create a copy of the city list.
+	newCity = rand() % numCities;
+	position1 = (size > 0) ? (rand() % size) : 0;
+	newCities.insert(newCities.begin()+position1, newCity);
+	return newCities;
+}
+
+std::vector<int> removeCity(std::vector<int> cities)
+{
+	int position1;
+	long size = cities.size();
+	std::vector<int> newCities(cities); //Create a copy of the city list.
+	position1 = rand() % size;
+	newCities.erase(newCities.begin()+position1);
+	return newCities;
+}
+
+std::vector<int> swapCities(std::vector<int> cities)
+{
+	int position1, position2;
+	long size = cities.size();
+	std::vector<int> newCities(cities); //Create a copy of the city list.
+	position1 = rand() % size;
+	do {
+		position2 = rand() % newCities.size();
+	} while (position1 == position2);
+	std::iter_swap(newCities.begin()+position1, newCities.begin()+position2);
+	return newCities;
 }
 
 int numIllegalCities(std::vector<int> cities){
