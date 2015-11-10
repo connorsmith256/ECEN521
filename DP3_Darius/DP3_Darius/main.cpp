@@ -51,15 +51,15 @@ int main(int argc, const char* argv[]) {
     ReadFile(f);
     fclose(f);
     
-    for(int i = 0; i < numCities; i++) {
-        for(int k = 0; k < numCities; k++) {
-            printf("%d ",inputArray[i][k]);
-        }
-        printf("\n");
-    }
-    
     double start = 0.0,end;
     if (verbose) {
+        printf("Diagonalized Matrix\n");
+        for(int i = 0; i < numCities; i++) {
+            for(int k = 0; k < numCities; k++) {
+                printf("%d ",inputArray[i][k]);
+            }
+            printf("\n");
+        }
         start = get_current_time();
     }
     darius();
@@ -92,11 +92,13 @@ void ReadLine(char* line) {
         for(int i = 0; i < inputLine - 1; i++) {
             sscanf(&line[2*i+1]," %s", input);
             temp = atoi(input);
-            printf("%d ",temp);
+            if (verbose)
+                printf("%d ",temp);
             inputArray[inputLine - 2][i] = temp;
             inputArray[i][inputLine-2] = temp;
         }
-        printf("\n");
+        if(verbose)
+            printf("\n");
     }
     inputLine++;
 }
