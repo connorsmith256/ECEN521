@@ -6,6 +6,7 @@
 #include <math.h>
 #include <limits.h>
 #include <vector>
+#include <set>
 
 #define MAX_SIZE 25
 
@@ -25,8 +26,8 @@ extern int numCities;
 extern int inputArray[MAX_SIZE][MAX_SIZE];
 
 double dRand();
-std::vector<char> getNewCities(std::vector<char>);
-int getCost(std::vector<char>);
-std::pair<std::vector<char>, int> darius();
+std::vector<int> getNewCities(std::vector<int>);
+int getCost(std::vector<int>, int);
+std::pair<std::vector<int>, int> darius();
 
 #endif

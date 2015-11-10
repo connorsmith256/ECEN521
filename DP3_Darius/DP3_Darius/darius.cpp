@@ -1,11 +1,11 @@
 #include "darius.h"
 
-std::pair<std::vector<char>, int> darius() {
-    std::pair<std::vector<char>, int> results;
+std::pair<std::vector<int>, int> darius() {
+    std::pair<std::vector<int>, int> results;
 
-    std::vector<char> cities;
-    std::vector<char> newCities;
-    std::vector<char> minCities;
+    std::vector<int> cities;
+    std::vector<int> newCities;
+    std::vector<int> minCities;
     int cost = INT_MAX;
     int newCost = INT_MAX;
     int minCost = INT_MAX;
@@ -20,7 +20,7 @@ std::pair<std::vector<char>, int> darius() {
             // create new solution based off current
             newCities = getNewCities(cities);
             // calculate cost for new solution
-            newCost = getCost(cities);
+            newCost = getCost(cities, temp);
 
             // if better, or acceptably worse
             if (newCost < cost || exp(cost - newCost)/(K*temp) >= dRand()) {
@@ -47,14 +47,39 @@ double dRand() {
     return d;
 }
 
-std::vector<char> getNewCities(std::vector<char> cities) {
-    std::vector<char> newCities;
+std::vector<int> getNewCities(std::vector<int> cities) {
+    std::vector<int> newCities;
 
-    return newCities;
+    return cities;
 }
 
-int getCost(std::vector<char> cities) {
-    int cost = 0;
+int numIllegalCities(std::vector<int> cities){
+    int count = 0;
+    for (int i = 0; i < cities.size()-1; i++) {
+        if (inputArray[cities.at(i)][cities.at(i+1)] == 0){
+            count++;
+        }
+    }
+    return count;
+}
 
+int calcSum(std::vector<int> cities) {
+    int sum = 0;
+    for (int i = 0; i < cities.size()-1; i++) {
+        sum += inputArray[cities.at(i)][cities.at(i+1)];
+    }
+    return sum;
+}
+
+int numMissingCities(std::vector<int> cities){
+    std::set<int> uniqueCities(cities.begin(), cities.end());
+    return numCities-uniqueCities.size();
+}
+
+int getCost(std::vector<int> cities, int temp) {
+    int cost1 = C1*calcSum(cities);
+    int cost2 = (C2/temp)*numMissingCities(cities);
+    int cost3 = (C3/temp)*numIllegalCities(cities);
+    int cost = cost1 + cost2 + cost3;
     return cost;
 }
