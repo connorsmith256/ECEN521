@@ -50,9 +50,29 @@ double dRand() {
 }
 
 std::vector<int> getNewCities(std::vector<int> cities) {
-    std::vector<int> newCities;
+    std::vector<int> newCities(cities.begin(), cities.end());
+    int newCity, position1, position2;
 
-    return cities;
+    int method = rand() % 3;
+    switch(method) {
+    case 0:                                                 // add one
+        newCity = rand() % numCities;
+        position1 = rand() % newCities.size();
+        newCities.insert(newCities.begin()+position1, newCity);
+        break;
+    case 1:                                                 // remove one
+        position1 = rand() % newCities.size();
+        newCities.erase(newCities.begin()+position1);
+        break;
+    case 2:                                                 // swap two
+        position1 = rand() % newCities.size();
+        do {
+            position2 = rand() % newCities.size();
+        } while (position1 == position2);
+        std::iter_swap(newCities.begin()+position1, newCities.begin()+position2);
+    }
+
+    return newCities;
 }
 
 int numIllegalCities(std::vector<int> cities){
