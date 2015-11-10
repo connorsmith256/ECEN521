@@ -51,21 +51,25 @@ double dRand() {
 
 std::vector<int> getNewCities(std::vector<int> cities) {
     std::vector<int> newCities(cities.begin(), cities.end());
+    int size = newCities.size();
     int newCity, position1, position2;
 
     int method = rand() % 3;
+    if (size == 0) {
+        method = 0;
+    }
     switch(method) {
     case 0:                                                 // add one
         newCity = rand() % numCities;
-        position1 = rand() % newCities.size();
+        position1 = (size > 0) ? (rand() % size) : 0;
         newCities.insert(newCities.begin()+position1, newCity);
         break;
     case 1:                                                 // remove one
-        position1 = rand() % newCities.size();
+        position1 = rand() % size;
         newCities.erase(newCities.begin()+position1);
         break;
     case 2:                                                 // swap two
-        position1 = rand() % newCities.size();
+        position1 = rand() % size;
         do {
             position2 = rand() % newCities.size();
         } while (position1 == position2);
@@ -76,8 +80,9 @@ std::vector<int> getNewCities(std::vector<int> cities) {
 }
 
 int numIllegalCities(std::vector<int> cities){
+    int size = (int)cities.size();
     int count = 0;
-    for (int i = 0; i < cities.size()-1; i++) {
+    for (int i = 0; i < size-1; i++) {
         if (inputArray[cities.at(i)][cities.at(i+1)] == SENTINEL){
             count++;
         }
@@ -86,8 +91,9 @@ int numIllegalCities(std::vector<int> cities){
 }
 
 int calcSum(std::vector<int> cities) {
+    int size = (int)cities.size();
     int sum = 0;
-    for (int i = 0; i < cities.size()-1; i++) {
+    for (int i = 0; i < size-1; i++) {
         int temp = inputArray[cities.at(i)][cities.at(i+1)];
         sum += (temp >= 0) ? temp : 0;
     }
