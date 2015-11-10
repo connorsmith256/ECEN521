@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:PathFinder.xcodeproj">
+      location = "self:DP3_Darius.xcodeproj">
    </FileRef>
 </Workspace>

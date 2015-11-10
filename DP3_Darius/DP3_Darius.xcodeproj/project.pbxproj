@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2DF9CC9A1BF1419B0024814E /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9CC991BF1419B0024814E /* main.c */; };
+		2D2A3FA01BF1920A00EA29F3 /* darius.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A3F9F1BF1920A00EA29F3 /* darius.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		2DF9CC941BF1419A0024814E /* CopyFiles */ = {
+		2D2A3F931BF1916F00EA29F3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -23,12 +23,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2DF9CC961BF1419B0024814E /* PathFinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PathFinder; sourceTree = BUILT_PRODUCTS_DIR; };
-		2DF9CC991BF1419B0024814E /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		2D2A3F951BF1916F00EA29F3 /* DP3_Darius */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DP3_Darius; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D2A3F9F1BF1920A00EA29F3 /* darius.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = darius.cpp; path = DP3_Darius/darius.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2DF9CC931BF1419A0024814E /* Frameworks */ = {
+		2D2A3F921BF1916F00EA29F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -38,94 +38,94 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2DF9CC8D1BF1419A0024814E = {
+		2D2A3F8C1BF1916F00EA29F3 = {
 			isa = PBXGroup;
 			children = (
-				2DF9CC981BF1419B0024814E /* PathFinder */,
-				2DF9CC971BF1419B0024814E /* Products */,
+				2D2A3F9F1BF1920A00EA29F3 /* darius.cpp */,
+				2D2A3F971BF1916F00EA29F3 /* DP3_Darius */,
+				2D2A3F961BF1916F00EA29F3 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		2DF9CC971BF1419B0024814E /* Products */ = {
+		2D2A3F961BF1916F00EA29F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2DF9CC961BF1419B0024814E /* PathFinder */,
+				2D2A3F951BF1916F00EA29F3 /* DP3_Darius */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2DF9CC981BF1419B0024814E /* PathFinder */ = {
+		2D2A3F971BF1916F00EA29F3 /* DP3_Darius */ = {
 			isa = PBXGroup;
 			children = (
-				2DF9CC991BF1419B0024814E /* main.c */,
 			);
-			path = PathFinder;
+			path = DP3_Darius;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2DF9CC951BF1419A0024814E /* PathFinder */ = {
+		2D2A3F941BF1916F00EA29F3 /* DP3_Darius */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2DF9CC9D1BF1419B0024814E /* Build configuration list for PBXNativeTarget "PathFinder" */;
+			buildConfigurationList = 2D2A3F9C1BF1916F00EA29F3 /* Build configuration list for PBXNativeTarget "DP3_Darius" */;
 			buildPhases = (
-				2DF9CC921BF1419A0024814E /* Sources */,
-				2DF9CC931BF1419A0024814E /* Frameworks */,
-				2DF9CC941BF1419A0024814E /* CopyFiles */,
+				2D2A3F911BF1916F00EA29F3 /* Sources */,
+				2D2A3F921BF1916F00EA29F3 /* Frameworks */,
+				2D2A3F931BF1916F00EA29F3 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = PathFinder;
-			productName = PathFinder;
-			productReference = 2DF9CC961BF1419B0024814E /* PathFinder */;
+			name = DP3_Darius;
+			productName = DP3_Darius;
+			productReference = 2D2A3F951BF1916F00EA29F3 /* DP3_Darius */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		2DF9CC8E1BF1419A0024814E /* Project object */ = {
+		2D2A3F8D1BF1916F00EA29F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = "James Gang";
+				ORGANIZATIONNAME = "James Gang Interactive";
 				TargetAttributes = {
-					2DF9CC951BF1419A0024814E = {
+					2D2A3F941BF1916F00EA29F3 = {
 						CreatedOnToolsVersion = 7.1;
 					};
 				};
 			};
-			buildConfigurationList = 2DF9CC911BF1419A0024814E /* Build configuration list for PBXProject "PathFinder" */;
+			buildConfigurationList = 2D2A3F901BF1916F00EA29F3 /* Build configuration list for PBXProject "DP3_Darius" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 2DF9CC8D1BF1419A0024814E;
-			productRefGroup = 2DF9CC971BF1419B0024814E /* Products */;
+			mainGroup = 2D2A3F8C1BF1916F00EA29F3;
+			productRefGroup = 2D2A3F961BF1916F00EA29F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2DF9CC951BF1419A0024814E /* PathFinder */,
+				2D2A3F941BF1916F00EA29F3 /* DP3_Darius */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2DF9CC921BF1419A0024814E /* Sources */ = {
+		2D2A3F911BF1916F00EA29F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DF9CC9A1BF1419B0024814E /* main.c in Sources */,
+				2D2A3FA01BF1920A00EA29F3 /* darius.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		2DF9CC9B1BF1419B0024814E /* Debug */ = {
+		2D2A3F9A1BF1916F00EA29F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -168,7 +168,7 @@
 			};
 			name = Debug;
 		};
-		2DF9CC9C1BF1419B0024814E /* Release */ = {
+		2D2A3F9B1BF1916F00EA29F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -204,14 +204,14 @@
 			};
 			name = Release;
 		};
-		2DF9CC9E1BF1419B0024814E /* Debug */ = {
+		2D2A3F9D1BF1916F00EA29F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		2DF9CC9F1BF1419B0024814E /* Release */ = {
+		2D2A3F9E1BF1916F00EA29F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -221,24 +221,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2DF9CC911BF1419A0024814E /* Build configuration list for PBXProject "PathFinder" */ = {
+		2D2A3F901BF1916F00EA29F3 /* Build configuration list for PBXProject "DP3_Darius" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2DF9CC9B1BF1419B0024814E /* Debug */,
-				2DF9CC9C1BF1419B0024814E /* Release */,
+				2D2A3F9A1BF1916F00EA29F3 /* Debug */,
+				2D2A3F9B1BF1916F00EA29F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2DF9CC9D1BF1419B0024814E /* Build configuration list for PBXNativeTarget "PathFinder" */ = {
+		2D2A3F9C1BF1916F00EA29F3 /* Build configuration list for PBXNativeTarget "DP3_Darius" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2DF9CC9E1BF1419B0024814E /* Debug */,
-				2DF9CC9F1BF1419B0024814E /* Release */,
+				2D2A3F9D1BF1916F00EA29F3 /* Debug */,
+				2D2A3F9E1BF1916F00EA29F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 2DF9CC8E1BF1419A0024814E /* Project object */;
+	rootObject = 2D2A3F8D1BF1916F00EA29F3 /* Project object */;
 }
