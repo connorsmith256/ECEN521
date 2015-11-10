@@ -117,3 +117,10 @@ double getCost(std::vector<int> cities, double temp) {
     double cost = cost1 + cost2 + cost3;
     return cost;
 }
+
+void print(std::vector<int> cities) {
+    int size = (int)cities.size();
+    for (int i = 0; i < size; i++) {
+        printf("%d ", cities.at(i));
+    }
+}

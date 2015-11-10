@@ -36,5 +36,6 @@ int numIllegalCities(std::vector<int> cities);
 int calcSum(std::vector<int> cities);
 int numMissingCities(std::vector<int> cities);
 double getCost(std::vector<int>, double);
+void print(std::vector<int> cities);
 
 #endif
