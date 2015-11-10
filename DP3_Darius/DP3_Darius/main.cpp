@@ -24,7 +24,7 @@ int main(int argc, const char* argv[]) {
         printf("Error: no input file specified.\n");
         return 1;
     }
-
+    
     if (argc >= 3) {
         for(int i = 1; i < argc; i++) {
             printf("%s\n",argv[i]);
@@ -34,30 +34,30 @@ int main(int argc, const char* argv[]) {
             }
         }
     }
-
+    
     FILE* f = fopen(argv[1], "r");
     if (f == NULL) {
         printf("Unable to open file!\n");
         return 1;
     }
-
+    
     inputLine = 0;
     for(int i = 0; i < MAX_SIZE; i++) {
         for(int k = 0; k < MAX_SIZE; k++) {
             inputArray[i][k] = 0;
         }
     }
-
+    
     ReadFile(f);
     fclose(f);
-
+    
     for(int i = 0; i < numCities; i++) {
         for(int k = 0; k < numCities; k++) {
             printf("%d ",inputArray[i][k]);
         }
         printf("\n");
     }
-
+    
     double start = 0.0,end;
     if (verbose) {
         start = get_current_time();
@@ -81,7 +81,7 @@ void ReadFile(FILE* f) {
 void ReadLine(char* line) {
     char input[256];
     int temp;
-
+    
     if (inputLine == 0) {
         sscanf(line,"%d", &numCities);
     }
@@ -90,17 +90,13 @@ void ReadLine(char* line) {
     }
     else {
         for(int i = 0; i < inputLine - 1; i++) {
-            if(i == inputLine - 2) {
-                sscanf(&line[i+2],"%s", input);
-            }
-            else {
-                sscanf(&line[i+2],"%s ", input);
-            }
+            sscanf(&line[2*i+1]," %s", input);
             temp = atoi(input);
-            printf("%d\n",temp);
-            inputArray[inputLine - 2][i-2] = temp;
-            inputArray[i-2][inputLine-2] = temp;
+            printf("%d ",temp);
+            inputArray[inputLine - 2][i] = temp;
+            inputArray[i][inputLine-2] = temp;
         }
+        printf("\n");
     }
     inputLine++;
 }

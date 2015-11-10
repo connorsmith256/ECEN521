@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D2A3FA01BF1920A00EA29F3 /* darius.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A3F9F1BF1920A00EA29F3 /* darius.cpp */; };
+		2D2A3FA61BF1989900EA29F3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A3FA51BF1989900EA29F3 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		2D2A3F951BF1916F00EA29F3 /* DP3_Darius */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DP3_Darius; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D2A3F9F1BF1920A00EA29F3 /* darius.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = darius.cpp; path = DP3_Darius/darius.cpp; sourceTree = "<group>"; };
+		2D2A3FA41BF1989900EA29F3 /* darius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = darius.h; path = DP3_Darius/darius.h; sourceTree = "<group>"; };
+		2D2A3FA51BF1989900EA29F3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = DP3_Darius/main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +45,8 @@
 			isa = PBXGroup;
 			children = (
 				2D2A3F9F1BF1920A00EA29F3 /* darius.cpp */,
+				2D2A3FA41BF1989900EA29F3 /* darius.h */,
+				2D2A3FA51BF1989900EA29F3 /* main.cpp */,
 				2D2A3F971BF1916F00EA29F3 /* DP3_Darius */,
 				2D2A3F961BF1916F00EA29F3 /* Products */,
 			);
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D2A3FA61BF1989900EA29F3 /* main.cpp in Sources */,
 				2D2A3FA01BF1920A00EA29F3 /* darius.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +243,7 @@
 				2D2A3F9E1BF1916F00EA29F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
