@@ -8,6 +8,7 @@
 #include <float.h>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 #define MAX_SIZE 25
 
