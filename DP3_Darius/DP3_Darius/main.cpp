@@ -54,23 +54,22 @@ int main(int argc, const char* argv[]) {
     double start = 0.0,end;
     if (verbose) {
         printf("Diagonalized Matrix\n");
-        for(int i = 0; i < numCities; i++) {
-            for(int k = 0; k < numCities; k++) {
-                printf("%d ",inputArray[i][k]);
+        for (int i = 0; i < numCities; i++) {
+            for (int k = 0; k < numCities; k++) {
+                int num = inputArray[i][k];
+                printf(num >= 0 ? " %d " : "%d ", num);
             }
             printf("\n");
         }
-        start = get_current_time();
     }
+    start = get_current_time();
     std::pair<std::vector<int>, int> results = darius();
     for (int i = 0; i < results.first.size(); i++) {
         printf("%c ", 'A'+results.first.at(i));
     }
     printf("(%d)\n", results.second);
-    if (verbose) {
-        end = get_current_time();
-        printf("Time: %lf\n",end-start);
-    }
+    end = get_current_time();
+    printf("Time: %lf\n",end-start);
     return 0;
 }
 
@@ -95,14 +94,16 @@ void ReadLine(char* line) {
     else {
         for(int i = 0; i < inputLine - 1; i++) {
             sscanf(&line[2*i+1]," %s", input);
-            temp = atoi(input);
-            if (verbose)
-                printf("%d ",temp);
+            temp = (input[0] == '-') ? SENTINEL : atoi(input);
+            if (verbose) {
+                printf(temp >= 0 ? " %d " : "%d ",temp);
+            }
             inputArray[inputLine - 2][i] = temp;
             inputArray[i][inputLine-2] = temp;
         }
-        if(verbose)
+        if(verbose) {
             printf("\n");
+        }
     }
     inputLine++;
 }

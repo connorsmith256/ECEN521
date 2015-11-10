@@ -78,7 +78,7 @@ std::vector<int> getNewCities(std::vector<int> cities) {
 int numIllegalCities(std::vector<int> cities){
     int count = 0;
     for (int i = 0; i < cities.size()-1; i++) {
-        if (inputArray[cities.at(i)][cities.at(i+1)] == 0){
+        if (inputArray[cities.at(i)][cities.at(i+1)] == SENTINEL){
             count++;
         }
     }
@@ -88,7 +88,8 @@ int numIllegalCities(std::vector<int> cities){
 int calcSum(std::vector<int> cities) {
     int sum = 0;
     for (int i = 0; i < cities.size()-1; i++) {
-        sum += inputArray[cities.at(i)][cities.at(i+1)];
+        int temp = inputArray[cities.at(i)][cities.at(i+1)];
+        sum += (temp >= 0) ? temp : 0;
     }
     return sum;
 }

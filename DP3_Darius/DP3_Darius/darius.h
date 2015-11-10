@@ -11,6 +11,7 @@
 #include <algorithm>
 
 #define MAX_SIZE 25
+#define SENTINEL -1
 
 // annealing constants
 #define HIGH_TEMP 1000
