@@ -11,8 +11,13 @@ std::pair<std::vector<int>, int> darius() {
     double minCost = DBL_MAX;
 
     // create initial solution
-    for (int i = 0; i < numCities; i++) {
-        cities.push_back(i);
+    cities.push_back(0);
+    while (numMissingCities(cities) > 0) {
+        int newCity = rand() % numCities;
+        int lastCity = cities.at(cities.size()-1);
+        if (inputArray[lastCity][newCity] > 0) {
+            cities.push_back(newCity);
+        }
     }
 
     for (double temp = HIGH_TEMP; temp > LOW_TEMP && cost > COST_MIN; temp *= COOLING_FACTOR) {
