@@ -6,17 +6,17 @@ std::pair<std::vector<int>, int> darius() {
     std::vector<int> cities;
     std::vector<int> newCities;
     std::vector<int> minCities;
-    int cost = INT_MAX;
-    int newCost = INT_MAX;
-    int minCost = INT_MAX;
+    double cost = DBL_MAX;
+    double newCost = DBL_MAX;
+    double minCost = DBL_MAX;
 
     // create initial solution
     for (int i = 0; i < numCities; i++) {
         cities.push_back(i);
     }
 
-    for (int temp = HIGH_TEMP; temp > LOW_TEMP && cost > COST_MIN; temp *= COOLING_FACTOR) {
-        for (int i = 0; i < 100; i++) {
+    for (double temp = HIGH_TEMP; temp > LOW_TEMP && cost > COST_MIN; temp *= COOLING_FACTOR) {
+        for (int i = 0; i < ITERATIONS_PER_TEMP; i++) {
             // create new solution based off current
             newCities = getNewCities(cities);
             // calculate cost for new solution
@@ -40,7 +40,7 @@ std::pair<std::vector<int>, int> darius() {
 
     // return best so far
     results.first = minCities;
-    results.second = minCost;
+    results.second = (int)(minCost/C1);
     return results;
 }
 
@@ -78,10 +78,10 @@ int numMissingCities(std::vector<int> cities){
     return numCities-uniqueCities.size();
 }
 
-int getCost(std::vector<int> cities, int temp) {
-    int cost1 = C1*calcSum(cities);
-    int cost2 = (C2/temp)*numMissingCities(cities);
-    int cost3 = (C3/temp)*numIllegalCities(cities);
-    int cost = cost1 + cost2 + cost3;
+double getCost(std::vector<int> cities, double temp) {
+    double cost1 = C1*calcSum(cities);
+    double cost2 = (C2/temp)*numMissingCities(cities);
+    double cost3 = (C3/temp)*numIllegalCities(cities);
+    double cost = cost1 + cost2 + cost3;
     return cost;
 }

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <limits.h>
+#include <float.h>
 #include <vector>
 #include <set>
 
@@ -14,13 +15,14 @@
 #define HIGH_TEMP 1000
 #define LOW_TEMP 1
 #define COOLING_FACTOR 0.9
+#define ITERATIONS_PER_TEMP 1000
 #define COST_MIN 1
 #define K 1
 
 // cost function constants
 #define C1 1
-#define C2 1
-#define C3 1
+#define C2 100
+#define C3 100
 
 extern int numCities;
 extern int inputArray[MAX_SIZE][MAX_SIZE];
@@ -31,6 +33,6 @@ std::vector<int> getNewCities(std::vector<int>);
 int numIllegalCities(std::vector<int> cities);
 int calcSum(std::vector<int> cities);
 int numMissingCities(std::vector<int> cities);
-int getCost(std::vector<int>, int);
+double getCost(std::vector<int>, double);
 
 #endif
