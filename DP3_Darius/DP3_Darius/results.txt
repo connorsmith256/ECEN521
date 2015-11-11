@@ -1,0 +1,77 @@
+---------------------------------------------------------------------
+ITERATIONS_PER_TEMP = 1000
+---------------------------------------------------------------------
+
+tests/map10
+A B C J C D H G I E F (51)
+Time: 0.939750
+tests/map13
+A F E M J C D H G I L K B (60)
+Time: 0.943842
+tests/map16
+A C D C B K L P I G N J O H M E F (58)
+Time: 0.987252
+tests/map19
+A Q O K B C N H G Q L I P R D C J M E F S (75)
+Time: 1.047688
+tests/map22
+A Q L I P R D C N H G U M J S F E O K B T V (87)
+Time: 1.098319
+tests/map25
+A C J M E F W F S Y H N P I G U R D X L Q V T B K O (98)
+Time: 1.163957
+tests/map8
+A F E D H D C B C G (53)
+Time: 0.847082
+
+---------------------------------------------------------------------
+ITERATIONS_PER_TEMP = 10000
+---------------------------------------------------------------------
+
+tests/map10
+A F E I G H D C B C J (54)
+Time: 8.767480
+tests/map13
+A F E M J C D L I G H K B (58)
+Time: 9.413797
+tests/map16
+A C D C B K L P I G N J O H M E F (58)
+Time: 10.243369
+tests/map19
+A Q L I P R D C N H G Q O K B C J M E F S (75)
+Time: 10.484279
+tests/map22
+A Q L I P N H G U R D C J M E F S O K B T V (86)
+Time: 10.956893
+tests/map25
+A C J M E F W F S Y H N P I G U R D X L Q V T B K O (98)
+Time: 11.597512
+tests/map8
+A F E D H D C B C G (53)
+Time: 8.400635
+
+---------------------------------------------------------------------
+ITERATIONS_PER_TEMP = 100000
+---------------------------------------------------------------------
+
+tests/map10
+A B C J C D H G I E F (51)
+Time: 87.759915
+tests/map13
+A B K H G I L D C J M E F (55)
+Time: 94.032242
+tests/map16
+A F E M H K B C D N J O L P I G (58)
+Time: 98.689516
+tests/map19
+A Q L I G H N P R D C J M B K O E F S (70)
+Time: 104.415834
+tests/map22
+A Q L I P N H G U R D C J M E F S O K B T V (86)
+Time: 109.360421
+tests/map25
+A Q G H Y S F W F E O K B T V C J M N P I L X D R U (94)
+Time: 116.704310
+tests/map8
+A F E D H D C B C G (53)
+Time: 84.483130
