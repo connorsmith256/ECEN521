@@ -29,9 +29,7 @@ std::pair<std::vector<int>, int> darius() {
                 cost = newCost;
 
                 // remember best so far
-                if (cost < minCost
-                        && numIllegalCities(cities) == 0
-                        && numMissingCities(cities) == 0) {
+                if (cost < minCost) {
                     minCities = cities;
                     minCost = cost;
                 }
@@ -129,10 +127,7 @@ int numMissingCities(std::vector<int> cities){
 }
 
 double getCost(std::vector<int> cities, double temp) {
-    double cost1 = C1*calcSum(cities);
-    double cost2 = (C2/temp)*numMissingCities(cities);
-    double cost3 = (C3/temp)*numIllegalCities(cities);
-    double cost = cost1 + cost2 + cost3;
+    double cost = calcSum(cities);
     return cost;
 }
 
