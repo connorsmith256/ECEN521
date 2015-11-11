@@ -52,10 +52,7 @@ double dRand() {
 
 std::vector<int> getNewCities(std::vector<int> cities) {
     long size = cities.size();
-    int method = rand() % 3; //Choose a random move.
-    if (size == 0) {
-        method = 0;
-    }
+    int method = 2;
     switch(method) {
 		case 0:                                                 // add one
 			return insertCity(cities);
