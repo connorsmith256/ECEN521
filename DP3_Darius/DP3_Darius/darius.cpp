@@ -95,15 +95,18 @@ std::vector<int> removeCity(std::vector<int> cities)
 
 std::vector<int> swapCities(std::vector<int> cities)
 {
-	int position1, position2;
-	long size = cities.size();
 	std::vector<int> newCities(cities); //Create a copy of the city list.
-	position1 = rand() % size;
+    int position1, position2;
+
+    long size = cities.size();
+    position1 = rand() % (size-1) + 1;
 	do {
-		position2 = rand() % newCities.size();
+		position2 = rand() % (size-1) + 1;
 	} while (position1 == position2);
+
 	std::iter_swap(newCities.begin()+position1, newCities.begin()+position2);
-	return newCities;
+
+    return newCities;
 }
 
 int numIllegalCities(std::vector<int> cities){
