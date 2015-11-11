@@ -25,7 +25,7 @@ std::pair<std::vector<int>, int> darius() {
             // create new solution based off current
             newCities = getNewCities(cities);
             // calculate cost for new solution
-            newCost = getCost(cities, temp);
+            newCost = getCost(newCities, temp);
 
             // if better, or acceptably worse
             if (newCost < cost || exp(cost - newCost)/(K*temp) >= dRand()) {
