@@ -18,6 +18,43 @@ double get_current_time() {
     return ((double) tp.tv_sec + (double) tp.tv_usec * 1e-6);
 }
 
+void printInput() {
+    printf("Diagonalized Matrix\n");
+    printf("  ");
+    for (int i = 0; i < numCities; i++) {
+        printf(" %c ", 'A'+i);
+    }
+    printf("\n");
+    for (int i = 0; i < numCities; i++) {
+        printf("%c ", 'A'+i);
+        for (int k = 0; k < numCities; k++) {
+            int num = inputArray[i][k];
+            if (num >= 0) {
+                printf(" %d ", num);
+            }
+            else {
+                printf(" - ");
+            }
+        }
+        printf("\n");
+    }
+}
+
+void printResults(std::pair<std::vector<int>, int> results) {
+    for (int i = 0; i < results.first.size()-1; i++) {
+        int city1 = results.first.at(i);
+        int city2 = results.first.at(i+1);
+        std::vector<int> path = getPath(city1, city2);
+        for (int i = 0; i < path.size()-1; i++) {
+            printf("%c ", 'A'+path.at(i));
+        }
+        if (i == results.first.size()-2) {
+            printf("%c ", 'A'+path.at(path.size()-1));
+        }
+    }
+    printf("(%d)\n", results.second);
+}
+
 int main(int argc, const char* argv[]) {
     verbose = false;
     if (argc < 2) {
@@ -51,25 +88,18 @@ int main(int argc, const char* argv[]) {
     ReadFile(f);
     fclose(f);
 
-    double start = 0.0,end;
+    double start, end;
     if (verbose) {
-        printf("Diagonalized Matrix\n");
-        for (int i = 0; i < numCities; i++) {
-            for (int k = 0; k < numCities; k++) {
-                int num = inputArray[i][k];
-                printf(num >= 0 ? " %d " : "%d ", num);
-            }
-            printf("\n");
-        }
+        printInput();
     }
+
     start = get_current_time();
+    floyd(numCities, inputArray);
     std::pair<std::vector<int>, int> results = darius();
-    for (int i = 0; i < results.first.size(); i++) {
-        printf("%c ", 'A'+results.first.at(i));
-    }
-    printf("(%d)\n", results.second);
     end = get_current_time();
+    printResults(results);
     printf("Time: %lf\n",end-start);
+
     return 0;
 }
 
