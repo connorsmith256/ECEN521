@@ -16,8 +16,8 @@
 // annealing constants
 #define HIGH_TEMP 1000
 #define LOW_TEMP 1
-#define COOLING_FACTOR 0.9
-#define ITERATIONS_PER_TEMP 1000
+#define COOLING_FACTOR 0.99
+#define ITERATIONS_PER_TEMP 10000
 #define COST_MIN 1
 #define K 1
 
