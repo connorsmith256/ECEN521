@@ -45,8 +45,8 @@ void printResults(std::pair<std::vector<int>, int> results) {
         int city1 = results.first.at(i);
         int city2 = results.first.at(i+1);
         std::vector<int> path = getPath(city1, city2);
-        for (int i = 0; i < path.size()-1; i++) {
-            printf("%c ", 'A'+path.at(i));
+        for (int j = 0; j < path.size()-1; j++) {
+            printf("%c ", 'A'+path.at(j));
         }
         if (i == results.first.size()-2) {
             printf("%c ", 'A'+path.at(path.size()-1));
