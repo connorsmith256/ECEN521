@@ -7,6 +7,10 @@
 #include <sys/time.h>
 #include <vector>
 
+void print_label(std::string label) {
+	std::cout << "-----------------------\n" << label << "\n-----------------------\n";
+}
+
 void print_set(std::set<int> s) {
 	for (std::set<int>::iterator I = s.begin(), IE = s.end(); I != IE; I++) {
 		std::cout << *I << " ";
@@ -24,20 +28,22 @@ bool is_cover(std::set<int> s, int max_num) {
 	return s.size() == max_num;
 }
 
-int main(int argc, char* argv[]) {
-	std::string file_name(argv[1]);
-	std::ifstream input_file(file_name.c_str());
+std::pair<int, int> getHeader(const char* file_name) {
+	std::pair<int, int> header;
+	std::ifstream fstream(file_name);
+	fstream >> header.first >> header.second;
+	return header;
+}
 
-	int max_num, num_lines;
-	input_file >> max_num >> num_lines;
-	std::string line;
-	getline(input_file, line);
-
-	std::cout << "Max number: " << max_num << ", Number of sets:  " << num_lines << "\n";
-
+std::vector<std::set<int> > getSets(const char* file_name, int num_sets) {
 	std::vector<std::set<int> > sets;
-	for (int i = 0; i < num_lines; i++) {
-		getline(input_file, line);
+	std::ifstream fstream(file_name);
+	std::string line;
+	getline(fstream, line);
+	getline(fstream, line);
+
+	for (int i = 0; i < num_sets; i++) {
+		getline(fstream, line);
 		std::istringstream ss(line);
 		std::set<int> new_set;
 		int num;
@@ -48,10 +54,25 @@ int main(int argc, char* argv[]) {
 		sets.push_back(new_set);
 	}
 
+	return sets;
+}
+
+int main(int argc, char* argv[]) {
+	std::string file_name(argv[1]);
+	std::pair<int, int> header = getHeader(file_name.c_str());
+	int max_num = header.first;
+	int num_sets = header.second;
+
+	print_label("Max number, number of sets:");
+	std::cout << max_num << "\n" << num_sets << "\n";
+
+	std::vector<std::set<int> > sets = getSets(file_name.c_str(), num_sets);
+	print_label("Input sets:");
 	for (std::vector<std::set<int> >::iterator I = sets.begin(), IE = sets.end(); I != IE; I++) {
-		std::cout << "Set: ";
 		print_set(*I);
 	}
+
+	print_label("Results:");
 
 	std::set<int> new_set = set_union(sets.at(2), sets.at(3));
 	print_set(new_set);
