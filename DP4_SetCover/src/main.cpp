@@ -57,6 +57,16 @@ std::vector<std::set<int> > getSets(const char* file_name, int num_sets) {
 	return sets;
 }
 
+std::vector<int> getMinimumSetCoverIndexes(std::vector<std::set<int> > sets, int max_num) {
+	std::vector<int> indexes;
+
+	indexes.push_back(2);
+	indexes.push_back(3);
+	indexes.push_back(4);
+
+	return indexes;
+}
+
 int main(int argc, char* argv[]) {
 	std::string file_name(argv[1]);
 	std::pair<int, int> header = getHeader(file_name.c_str());
@@ -73,14 +83,12 @@ int main(int argc, char* argv[]) {
 	}
 
 	print_label("Results:");
-
-	std::set<int> new_set = set_union(sets.at(2), sets.at(3));
-	print_set(new_set);
-
-	new_set = set_union(new_set, sets.at(4));
-	print_set(new_set);
-
-	std::cout << is_cover(new_set, max_num) << "\n";
+	std::vector<int> minimumIndexes = getMinimumSetCoverIndexes(sets, num_sets);
+	std::cout << minimumIndexes.size() << "\n";
+	for (std::vector<int>::iterator I = minimumIndexes.begin(), IE = minimumIndexes.end(); I != IE; I++) {
+		std::cout << "(" << *I << ") ";
+		print_set(sets.at(*I));
+	}
 
 	return 0;
 }
