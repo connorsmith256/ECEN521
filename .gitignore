@@ -1,3 +1,4 @@
 bin
 rand10000000.csv
 *.xcodeproj
+__pycache__
