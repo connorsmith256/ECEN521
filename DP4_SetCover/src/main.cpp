@@ -1,5 +1,6 @@
 #include <array>
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <set>
 #include <stdio.h>
