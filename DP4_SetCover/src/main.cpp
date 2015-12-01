@@ -8,7 +8,8 @@
 #include <vector>
 
 void print_label(std::string label) {
-	std::cout << "-----------------------\n" << label << "\n-----------------------\n";
+	std::string dashes("-------------------------------");
+	std::cout << dashes << "\n" << label <<	"\n" << dashes << "\n";
 }
 
 void print_set(std::set<int> s) {
@@ -57,8 +58,8 @@ std::vector<std::set<int> > getSets(const char* file_name, int num_sets) {
 	return sets;
 }
 
-std::vector<int> getMinimumSetCoverIndexes(std::vector<std::set<int> > sets, int max_num) {
-	std::vector<int> indexes;
+std::vector<int> getMinimumSetCoverIndexes(std::vector<std::set<int> > sets,
+		int max_num) {
 
 	indexes.push_back(2);
 	indexes.push_back(3);
@@ -78,14 +79,16 @@ int main(int argc, char* argv[]) {
 
 	std::vector<std::set<int> > sets = getSets(file_name.c_str(), num_sets);
 	print_label("Input sets:");
-	for (std::vector<std::set<int> >::iterator I = sets.begin(), IE = sets.end(); I != IE; I++) {
+	for (std::vector<std::set<int> >::iterator I = sets.begin(),
+			IE = sets.end(); I != IE; I++) {
 		print_set(*I);
 	}
 
 	print_label("Results:");
 	std::vector<int> minimumIndexes = getMinimumSetCoverIndexes(sets, num_sets);
 	std::cout << minimumIndexes.size() << "\n";
-	for (std::vector<int>::iterator I = minimumIndexes.begin(), IE = minimumIndexes.end(); I != IE; I++) {
+	for (std::vector<int>::iterator I = minimumIndexes.begin(),
+			IE = minimumIndexes.end(); I != IE; I++) {
 		std::cout << "(" << *I << ") ";
 		print_set(sets.at(*I));
 	}
