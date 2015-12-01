@@ -60,12 +60,22 @@ std::vector<std::set<int> > getSets(const char* file_name, int num_sets) {
 
 std::vector<int> getMinimumSetCoverIndexes(std::vector<std::set<int> > sets,
 		int max_num) {
+	std::vector<int> minimumIndexes;
+	bool foundSolution = false;
 
-	indexes.push_back(2);
-	indexes.push_back(3);
-	indexes.push_back(4);
+	int num_sets = sets.size();
+	for (int i = 1; i <= num_sets; i++) {
+		if (foundSolution) {
+			break;
+		}
+		// test all solutions of size i
+	}
 
-	return indexes;
+	minimumIndexes.push_back(2);
+	minimumIndexes.push_back(3);
+	minimumIndexes.push_back(4);
+
+	return minimumIndexes;
 }
 
 int main(int argc, char* argv[]) {
