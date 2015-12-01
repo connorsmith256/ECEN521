@@ -6,13 +6,13 @@
 #include <string>
 #include <sstream>
 #include <sys/time.h>
-#include <unordered_map>
 #include <vector>
 
 #define MAX_SIZE 1000
 
+std::set<int> previousSolutions;
+std::hash<std::string> hash_func;
 std::vector<std::array<int, MAX_SIZE> > sets;
-std::hash<int> hash_int;
 int maxNum;
 int numSets;
 int bestSoFar;
@@ -109,32 +109,29 @@ int solutionSize(std::array<int, MAX_SIZE> subsetIndexes) {
 	return size;
 }
 
-std::set<size_t> previousSolutions;
-
 //Create a hash for the current solution, insert it into a table.
 //Returns true if the solution has not yet been inserted, false
 //otherwise.
 bool isNew(std::array<int, MAX_SIZE> solution) {
-	size_t hash = 0;
-	for (int i = 0; i < MAX_SIZE; i++) {
-        hash += hash_int(solution.at(i));
+	std::string vecToString;
+	for (int i = 0; i < numSets; i++) {
+        vecToString += solution.at(i);
 	}
 
-	std::cout << hash << "\n";
-
-	bool found = previousSolutions.find(hash) != previousSolutions.end();
-	if (!found) {
-		previousSolutions.insert(hash);
-		std::cout << "not found, inserting " << hash << "\n";
+	int hash = hash_func(vecToString);
+	bool exists = previousSolutions.find(hash) != previousSolutions.end();
+	if (exists) {
+		return false;
 	}
-	return found;
+	previousSolutions.insert(hash);
+	return true;
 }
 
 //Applies the selected subset to the covering set.
 void applySubset(std::array<int, MAX_SIZE> set, std::array<int, MAX_SIZE> &covered){
     for(int i = 0; i < MAX_SIZE; i++)
     {
-        covered.at(i)+= set.at(i);
+        covered.at(i) += set.at(i);
     }
 }
 
@@ -149,24 +146,34 @@ void unapplySubset(std::array<int, MAX_SIZE> set, std::array<int, MAX_SIZE> &cov
 //Finds the minimum set cover for a universe.
 void getMinimumSetCoverIndexes(int index,
 		std::array<int, MAX_SIZE> subsetIndexes,
-		std::array<int, MAX_SIZE> covered) {
+		std::array<int, MAX_SIZE> covered, int depth) {
+
+    // std::cout << "depth: " << depth << "\n";
+    // printSet(subsetIndexes);
+    // printBitVector(covered);
 
     //Do not continue if we've already looked at this solution.
-    //if (!isNew(subsetIndexes)) {
-    // 	return;
-    //}
+    if (index > 0 && !isNew(subsetIndexes)) {
+    	// std::cout << "Not new. Returning.\n";
+    	return;
+    }
+
+    //Don't try to find solutions worse than the best so far
+    if (depth >= bestSoFar) {
+    	return;
+    }
 
     //If we've already included this index in our set, go to the next one.
-    printBitVector(covered);
-    while(covered.at(index) != 0)
+    while(covered.at(index) != 0) {
         index++;
+    }
 
     //Once we reach the end of the list.
     if (index == maxNum) {
-        std::cout << "All numbers have been inserted into the cover." << std::endl;
+        // std::cout << "All numbers have been inserted into the cover." << std::endl;
         //Calculate the size of this solution.
         int size = solutionSize(subsetIndexes);
-        std::cout << "Solution size: " << size << std::endl;
+        // std::cout << "Solution size: " << size << std::endl;
 
         //If this is the best cover so far, print it.
         if (fullCover(subsetIndexes) && size < bestSoFar) {
@@ -182,19 +189,25 @@ void getMinimumSetCoverIndexes(int index,
         return;
     }
 
-    std::cout << "Looking for a set containing: " << index+1 << std::endl;
+    // std::cout << "Looking for a set containing: " << index+1 << std::endl;
     int i = 0;
     while(i < numSets){
 		if (!subsetIndexes.at(i) && sets.at(i).at(index)) {
-            printSet(sets.at(i));
+            // printSet(sets.at(i));
 			subsetIndexes.at(i) = 1;
             applySubset(sets.at(i), covered);
-			getMinimumSetCoverIndexes(index+1, subsetIndexes, covered);
+			getMinimumSetCoverIndexes(index+1, subsetIndexes, covered, depth+1);
             unapplySubset(sets.at(i), covered);
 			subsetIndexes.at(i) = 0;
 		}
         i++;
 	}
+}
+
+double get_current_time() {
+    struct timeval tp;
+    gettimeofday(&tp, NULL);
+    return ((double) tp.tv_sec + (double) tp.tv_usec * 1e-6);
 }
 
 //Entry Point
@@ -215,12 +228,18 @@ int main(int argc, char* argv[]) {
 
 	printLabel("Results:");
 
+	double start_time = get_current_time();
+
+	previousSolutions.clear();
 	std::array<int, MAX_SIZE> subsetIndexes;
 	subsetIndexes.fill(0);
 	std::array<int, MAX_SIZE> covered;
 	covered.fill(0);
 	bestSoFar = MAX_SIZE;
-	getMinimumSetCoverIndexes(0, subsetIndexes, covered);
+	getMinimumSetCoverIndexes(0, subsetIndexes, covered, 0);
+
+	double end_time = get_current_time();
+	std::cout << "Execution time (s): " << (end_time - start_time) << "\n";
 
 	return 0;
 }
