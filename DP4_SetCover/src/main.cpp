@@ -7,101 +7,148 @@
 #include <sys/time.h>
 #include <vector>
 
-void print_label(std::string label) {
+std::vector<std::set<int> > sets;
+int maxNum;
+int numSets;
+
+void printLabel(std::string label) {
 	std::string dashes("-------------------------------");
 	std::cout << dashes << "\n" << label <<	"\n" << dashes << "\n";
 }
 
-void print_set(std::set<int> s) {
+void printSet(std::set<int> s) {
 	for (std::set<int>::iterator I = s.begin(), IE = s.end(); I != IE; I++) {
 		std::cout << *I << " ";
 	}
 	std::cout << "\n";
 }
 
-std::set<int> set_union(const std::set<int> s1, const std::set<int> s2) {
+std::set<int> setUnion(const std::set<int> s1, const std::set<int> s2) {
 	std::set<int> result = s1;
 	result.insert(s2.begin(), s2.end());
 	return result;
 }
 
-bool is_cover(std::set<int> s, int max_num) {
-	return s.size() == max_num;
+bool isCover(std::set<int> s, int maxNum) {
+	return s.size() == maxNum;
 }
 
-std::pair<int, int> getHeader(const char* file_name) {
+bool isSolution(std::vector<int> subsetIndexes) {
+	std::vector<int> contains(maxNum, 0);
+	for (std::vector<int>::iterator I = subsetIndexes.begin(),
+			IE = subsetIndexes.end(); I != IE; I++) {
+		std::set<int> curSet = sets.at(*I);
+		for (std::set<int>::iterator J = curSet.begin(), JE = curSet.end();
+				J != JE; J++) {
+			contains.at(*J-1) |= 1;
+		}
+	}
+
+	int sum = 0;
+	for (int i = 0; i < maxNum; i++) {
+		sum += contains.at(i);
+	}
+
+	return sum == maxNum;
+}
+
+void processHeader(const char* fileName) {
 	std::pair<int, int> header;
-	std::ifstream fstream(file_name);
-	fstream >> header.first >> header.second;
-	return header;
+	std::ifstream fstream(fileName);
+	fstream >> maxNum >> numSets;
 }
 
-std::vector<std::set<int> > getSets(const char* file_name, int num_sets) {
-	std::vector<std::set<int> > sets;
-	std::ifstream fstream(file_name);
+void getSets(const char* fileName) {
+	sets.clear();
+	std::ifstream fstream(fileName);
 	std::string line;
 	getline(fstream, line);
 	getline(fstream, line);
 
-	for (int i = 0; i < num_sets; i++) {
+	for (int i = 0; i < numSets; i++) {
 		getline(fstream, line);
 		std::istringstream ss(line);
-		std::set<int> new_set;
+		std::set<int> newSet;
 		int num;
 
 		while (ss >> num) {
-			new_set.insert(num);
+			newSet.insert(num);
 		}
-		sets.push_back(new_set);
+		sets.push_back(newSet);
 	}
-
-	return sets;
 }
 
-std::vector<int> getMinimumSetCoverIndexes(std::vector<std::set<int> > sets,
-		int max_num) {
+bool processSubset(std::vector<int> subsetIndexes) {
+	if (isSolution(subsetIndexes)) {
+		std::cout << subsetIndexes.size() << "\n";
+		for (std::vector<int>::iterator I = subsetIndexes.begin(),
+				IE = subsetIndexes.end(); I != IE; I++) {
+			std::cout << "(" << (*I+1) << ") ";
+			printSet(sets.at(*I));
+		}
+		std::cout << "\n";
+		return true;
+	}
+	return false;
+}
+
+bool processSubsets(std::vector<int> supersetIndexes, int k, int startIndex,
+		std::vector<int> subsetIndexes) {
+	if (subsetIndexes.size() == k) {
+		return processSubset(subsetIndexes);
+	}
+	if (startIndex == supersetIndexes.size()) {
+		return false;
+	}
+	int next = supersetIndexes.at(startIndex);
+	subsetIndexes.push_back(next);
+	if (processSubsets(supersetIndexes, k, startIndex+1, subsetIndexes)) {
+		return true;
+	}
+	subsetIndexes.pop_back();
+	if (processSubsets(supersetIndexes, k, startIndex+1, subsetIndexes)) {
+		return true;
+	}
+	return false;
+}
+
+void getMinimumSetCoverIndexes() {
 	std::vector<int> minimumIndexes;
+	std::vector<int> curIndexes;
 	bool foundSolution = false;
 
-	int num_sets = sets.size();
-	for (int i = 1; i <= num_sets; i++) {
+	std::vector<int> allIndexes;
+	for (int i = 0; i < numSets; i++) {
+		allIndexes.push_back(i);
+	}
+
+	for (int i = 1; i <= numSets; i++) {
+		// test all solutions of size i
+		curIndexes.clear();
+		foundSolution = processSubsets(allIndexes, i, 0, curIndexes);
 		if (foundSolution) {
 			break;
 		}
-		// test all solutions of size i
 	}
-
-	minimumIndexes.push_back(2);
-	minimumIndexes.push_back(3);
-	minimumIndexes.push_back(4);
-
-	return minimumIndexes;
 }
 
 int main(int argc, char* argv[]) {
-	std::string file_name(argv[1]);
-	std::pair<int, int> header = getHeader(file_name.c_str());
-	int max_num = header.first;
-	int num_sets = header.second;
+	std::string fileName(argv[1]);
+	processHeader(fileName.c_str());
 
-	print_label("Max number, number of sets:");
-	std::cout << max_num << "\n" << num_sets << "\n";
+	printLabel("Max number, number of sets:");
+	std::cout << maxNum << "\n" << numSets << "\n";
 
-	std::vector<std::set<int> > sets = getSets(file_name.c_str(), num_sets);
-	print_label("Input sets:");
+	getSets(fileName.c_str());
+	printLabel("Input sets:");
 	for (std::vector<std::set<int> >::iterator I = sets.begin(),
 			IE = sets.end(); I != IE; I++) {
-		print_set(*I);
+		std::cout << "(" << (I - sets.begin() + 1) << ") ";
+		printSet(*I);
 	}
 
-	print_label("Results:");
-	std::vector<int> minimumIndexes = getMinimumSetCoverIndexes(sets, num_sets);
-	std::cout << minimumIndexes.size() << "\n";
-	for (std::vector<int>::iterator I = minimumIndexes.begin(),
-			IE = minimumIndexes.end(); I != IE; I++) {
-		std::cout << "(" << *I << ") ";
-		print_set(sets.at(*I));
-	}
+	printLabel("Results:");
+	getMinimumSetCoverIndexes();
 
 	return 0;
 }
