@@ -13,6 +13,7 @@
 #define MAX_SOL_SIZE 100
 
 std::vector<std::array<int, MAX_NUM> > sets;
+std::hash<int> hash_int;
 int maxNum;
 int numSets;
 int bestSoFar;
@@ -22,43 +23,22 @@ void printLabel(std::string label) {
 	std::cout << dashes << "\n" << label <<	"\n" << dashes << "\n";
 }
 
-void printBitVector(std::array<int, MAX_NUM> vec) {
+void printSet(std::array<int, MAX_NUM> vec) {
 	for (int i = 0; i < maxNum; i++) {
-		if (vec.at(i)) {
+        if (vec.at(i)) {
 			std::cout << i+1 << " ";
-		}
+        }
 	}
 	std::cout << "\n";
 }
 
-// std::set<int> setUnion(const std::set<int> s1, const std::set<int> s2) {
-// 	std::set<int> result = s1;
-// 	result.insert(s2.begin(), s2.end());
-// 	return result;
-// }
+void printBitVector(std::array<int, MAX_NUM> vec) {
+    for (int i = 0; i < maxNum; i++) {
+        std::cout << vec.at(i) << " ";
+    }
+    std::cout << "\n";
+}
 
-// bool isCover(std::set<int> s, int maxNum) {
-// 	return s.size() == maxNum;
-// }
-
-// bool isSolution(std::vector<int> subsetIndexes) {
-// 	std::vector<int> contains(maxNum, 0);
-// 	for (std::vector<int>::iterator I = subsetIndexes.begin(),
-// 			IE = subsetIndexes.end(); I != IE; I++) {
-// 		std::set<int> curSet = sets.at(*I);
-// 		for (std::set<int>::iterator J = curSet.begin(), JE = curSet.end();
-// 				J != JE; J++) {
-// 			contains.at(*J-1) |= 1;
-// 		}
-// 	}
-
-// 	int sum = 0;
-// 	for (int i = 0; i < maxNum; i++) {
-// 		sum += contains.at(i);
-// 	}
-
-// 	return sum == maxNum;
-// }
 
 void processHeader(const char* fileName) {
 	std::pair<int, int> header;
@@ -87,51 +67,6 @@ void getSets(const char* fileName) {
 		sets.push_back(newArray);
 	}
 }
-
-// bool processSubset(std::vector<int> subsetIndexes) {
-// 	if (isSolution(subsetIndexes)) {
-// 		std::cout << subsetIndexes.size() << "\n";
-// 		for (std::vector<int>::iterator I = subsetIndexes.begin(),
-// 				IE = subsetIndexes.end(); I != IE; I++) {
-// 			std::cout << "(" << (*I+1) << ") ";
-// 			printBitVector(sets.at(*I));
-// 		}
-// 		std::cout << "\n";
-// 		return true;
-// 	}
-// 	return false;
-// }
-
-// bool processSubsets(std::vector<int> supersetIndexes, int k, int startIndex,
-// 		std::vector<int> subsetIndexes) {
-// 	if (subsetIndexes.size() == k) {
-// 		return processSubset(subsetIndexes);
-// 	}
-// 	if (startIndex == supersetIndexes.size()) {
-// 		return false;
-// 	}
-// 	int next = supersetIndexes.at(startIndex);
-// 	subsetIndexes.push_back(next);
-// 	if (processSubsets(supersetIndexes, k, startIndex+1, subsetIndexes)) {
-// 		return true;
-// 	}
-// 	subsetIndexes.pop_back();
-// 	if (processSubsets(supersetIndexes, k, startIndex+1, subsetIndexes)) {
-// 		return true;
-// 	}
-// 	return false;
-// }
-
-// bool fullCover(std::array<int, MAX_NUM> covered) {
-// 	for (int i = 0; i < maxNum; i++) {
-// 		if (!covered[i]) {
-// 			std::cout << i+1 << " not covered\n";
-// 			return false;
-// 		}
-// 	}
-
-// 	return true;
-// }
 
 bool fullCover(std::array<int, MAX_SOL_SIZE> subsetIndexes) {
 	std::array<int, MAX_NUM> universalSet;
@@ -163,6 +98,8 @@ bool fullCover(std::array<int, MAX_SOL_SIZE> subsetIndexes) {
 	return true;
 }
 
+
+//Calculate the number of sets being used in the set.
 int solutionSize(std::array<int, MAX_SOL_SIZE> subsetIndexes) {
 	int size = 0;
 
@@ -173,12 +110,15 @@ int solutionSize(std::array<int, MAX_SOL_SIZE> subsetIndexes) {
 	return size;
 }
 
-std::set<int> previousSolutions;
+std::set<size_t> previousSolutions;
 
+//Create a hash for the current solution, insert it into a table.
+//Returns true if the solution has not yet been inserted, false
+//otherwise.
 bool isNew(std::array<int, MAX_SOL_SIZE> solution) {
-	int hash = 0;
+	size_t hash = 0;
 	for (int i = 0; i < MAX_SOL_SIZE; i++) {
-		hash = hash*10 + solution.at(i);
+        hash += hash_int(solution.at(i));
 	}
 
 	std::cout << hash << "\n";
@@ -191,65 +131,74 @@ bool isNew(std::array<int, MAX_SOL_SIZE> solution) {
 	return found;
 }
 
+//Applies the selected subset to the covering set.
+void applySubset(std::array<int, MAX_NUM> set, std::array<int, MAX_NUM> &covered){
+    for(int i = 0; i < MAX_SOL_SIZE; i++)
+    {
+        covered.at(i)+= set.at(i);
+    }
+}
+
+//Unapplies the selected subset from the covering set.
+void unapplySubset(std::array<int, MAX_NUM> set, std::array<int, MAX_NUM> &covered){
+    for(int i = 0; i < MAX_SOL_SIZE; i++)
+    {
+        covered.at(i) -= set.at(i);;
+    }
+}
+
+//Finds the minimum set cover for a universe.
 void getMinimumSetCoverIndexes(int index,
 		std::array<int, MAX_SOL_SIZE> subsetIndexes,
 		std::array<int, MAX_NUM> covered) {
-	 if (!isNew(subsetIndexes)) {
-	 	return;
-	 }
+	
+    //Do not continue if we've already looked at this solution.
+    //if (!isNew(subsetIndexes)) {
+    // 	return;
+    //}
 
-	// std::cout << "index = " << index << ", size = " << solutionSize(subsetIndexes) << ", indexes = ";
-	// for (int i = 0; i < MAX_SOL_SIZE; i++) {
-	// 	if (subsetIndexes.at(i)) {
-	// 		std::cout << i << " ";
-	// 	}
-	// }
-	// std::cout << "\n";
+    //If we've already included this index in our set, go to the next one.
+    printBitVector(covered);
+    while(covered.at(index) != 0)
+        index++;
 
-	if (index == maxNum) {
-		int size = solutionSize(subsetIndexes);
-		if (fullCover(subsetIndexes) && size < bestSoFar) {
-			bestSoFar = size;
-			std::cout << "(" << size << ") ";
-			for (int i = 0; i < MAX_SOL_SIZE; i++) {
-				if (subsetIndexes.at(i)) {
-					std::cout << i+1 << " ";
-				}
-			}
-			std::cout << "\n";
-		}
-		return;
-	}
+    //Once we reach the end of the list.
+    if (index == maxNum) {
+        std::cout << "All numbers have been inserted into the cover." << std::endl;
+        //Calculate the size of this solution.
+        int size = solutionSize(subsetIndexes);
+        std::cout << "Solution size: " << size << std::endl;
 
-	for (int i = 0; i < numSets; i++) {
+        //If this is the best cover so far, print it.
+        if (fullCover(subsetIndexes) && size < bestSoFar) {
+            bestSoFar = size;
+            std::cout << "(" << size << ") ";
+            for (int i = 0; i < MAX_SOL_SIZE; i++) {
+                if (subsetIndexes.at(i)) {
+                    std::cout << i+1 << " ";
+                }
+            }
+            std::cout << "\n";
+        }
+        return;
+    }
+
+    std::cout << "Looking for a set containing: " << index+1 << std::endl;
+    int i = 0;
+    while(i < numSets){
 		if (!subsetIndexes.at(i) && sets.at(i).at(index)) {
+            printSet(sets.at(i));
 			subsetIndexes.at(i) = 1;
+            applySubset(sets.at(i), covered);
 			getMinimumSetCoverIndexes(index+1, subsetIndexes, covered);
+            unapplySubset(sets.at(i), covered);
 			subsetIndexes.at(i) = 0;
-			getMinimumSetCoverIndexes(index+1, subsetIndexes, covered);
 		}
+        i++;
 	}
-
-	// std::vector<int> minimumIndexes;
-	// std::vector<int> curIndexes;
-	// bool foundSolution = false;
-
-	// std::vector<int> allIndexes;
-	// for (int i = 0; i < numSets; i++) {
-	// 	allIndexes.push_back(i);
-	// }
-
-	// for (int i = 1; i <= numSets; i++) {
-	// 	// test all solutions of size i
-	// 	std::cout << i << "\n";
-	// 	curIndexes.clear();
-	// 	foundSolution = processSubsets(allIndexes, i, 0, curIndexes);
-	// 	if (foundSolution) {
-	// 		break;
-	// 	}
-	// }
 }
 
+//Entry Point
 int main(int argc, char* argv[]) {
 	std::string fileName(argv[1]);
 	processHeader(fileName.c_str());
@@ -262,7 +211,7 @@ int main(int argc, char* argv[]) {
 	for (std::vector<std::array<int, MAX_NUM> >::iterator I = sets.begin(),
 			IE = sets.end(); I != IE; I++) {
 		std::cout << "(" << (I - sets.begin() + 1) << ") ";
-		printBitVector(*I);
+		printSet(*I);
 	}
 
 	printLabel("Results:");
