@@ -9,10 +9,9 @@
 #include <unordered_map>
 #include <vector>
 
-#define MAX_NUM 1000
-#define MAX_SOL_SIZE 100
+#define MAX_SIZE 1000
 
-std::vector<std::array<int, MAX_NUM> > sets;
+std::vector<std::array<int, MAX_SIZE> > sets;
 std::hash<int> hash_int;
 int maxNum;
 int numSets;
@@ -23,7 +22,7 @@ void printLabel(std::string label) {
 	std::cout << dashes << "\n" << label <<	"\n" << dashes << "\n";
 }
 
-void printSet(std::array<int, MAX_NUM> vec) {
+void printSet(std::array<int, MAX_SIZE> vec) {
 	for (int i = 0; i < maxNum; i++) {
         if (vec.at(i)) {
 			std::cout << i+1 << " ";
@@ -32,7 +31,7 @@ void printSet(std::array<int, MAX_NUM> vec) {
 	std::cout << "\n";
 }
 
-void printBitVector(std::array<int, MAX_NUM> vec) {
+void printBitVector(std::array<int, MAX_SIZE> vec) {
     for (int i = 0; i < maxNum; i++) {
         std::cout << vec.at(i) << " ";
     }
@@ -57,7 +56,7 @@ void getSets(const char* fileName) {
 		getline(fstream, line);
 
 		std::istringstream ss(line);
-		std::array<int, MAX_NUM> newArray;
+		std::array<int, MAX_SIZE> newArray;
 		newArray.fill(0);
 
 		int num;
@@ -68,11 +67,11 @@ void getSets(const char* fileName) {
 	}
 }
 
-bool fullCover(std::array<int, MAX_SOL_SIZE> subsetIndexes) {
-	std::array<int, MAX_NUM> universalSet;
+bool fullCover(std::array<int, MAX_SIZE> subsetIndexes) {
+	std::array<int, MAX_SIZE> universalSet;
 	universalSet.fill(0);
 
-	for (int i = 0; i < MAX_SOL_SIZE; i++) {
+	for (int i = 0; i < MAX_SIZE; i++) {
 		if (subsetIndexes.at(i)) {
 			for (int j = 0; j < maxNum; j++) {
 				if (sets.at(i).at(j)) {
@@ -100,10 +99,10 @@ bool fullCover(std::array<int, MAX_SOL_SIZE> subsetIndexes) {
 
 
 //Calculate the number of sets being used in the set.
-int solutionSize(std::array<int, MAX_SOL_SIZE> subsetIndexes) {
+int solutionSize(std::array<int, MAX_SIZE> subsetIndexes) {
 	int size = 0;
 
-	for (int i = 0; i < MAX_SOL_SIZE; i++) {
+	for (int i = 0; i < MAX_SIZE; i++) {
 		size += subsetIndexes.at(i);
 	}
 
@@ -115,9 +114,9 @@ std::set<size_t> previousSolutions;
 //Create a hash for the current solution, insert it into a table.
 //Returns true if the solution has not yet been inserted, false
 //otherwise.
-bool isNew(std::array<int, MAX_SOL_SIZE> solution) {
+bool isNew(std::array<int, MAX_SIZE> solution) {
 	size_t hash = 0;
-	for (int i = 0; i < MAX_SOL_SIZE; i++) {
+	for (int i = 0; i < MAX_SIZE; i++) {
         hash += hash_int(solution.at(i));
 	}
 
@@ -132,16 +131,16 @@ bool isNew(std::array<int, MAX_SOL_SIZE> solution) {
 }
 
 //Applies the selected subset to the covering set.
-void applySubset(std::array<int, MAX_NUM> set, std::array<int, MAX_NUM> &covered){
-    for(int i = 0; i < MAX_SOL_SIZE; i++)
+void applySubset(std::array<int, MAX_SIZE> set, std::array<int, MAX_SIZE> &covered){
+    for(int i = 0; i < MAX_SIZE; i++)
     {
         covered.at(i)+= set.at(i);
     }
 }
 
 //Unapplies the selected subset from the covering set.
-void unapplySubset(std::array<int, MAX_NUM> set, std::array<int, MAX_NUM> &covered){
-    for(int i = 0; i < MAX_SOL_SIZE; i++)
+void unapplySubset(std::array<int, MAX_SIZE> set, std::array<int, MAX_SIZE> &covered){
+    for(int i = 0; i < MAX_SIZE; i++)
     {
         covered.at(i) -= set.at(i);;
     }
@@ -149,9 +148,9 @@ void unapplySubset(std::array<int, MAX_NUM> set, std::array<int, MAX_NUM> &cover
 
 //Finds the minimum set cover for a universe.
 void getMinimumSetCoverIndexes(int index,
-		std::array<int, MAX_SOL_SIZE> subsetIndexes,
-		std::array<int, MAX_NUM> covered) {
-	
+		std::array<int, MAX_SIZE> subsetIndexes,
+		std::array<int, MAX_SIZE> covered) {
+
     //Do not continue if we've already looked at this solution.
     //if (!isNew(subsetIndexes)) {
     // 	return;
@@ -173,7 +172,7 @@ void getMinimumSetCoverIndexes(int index,
         if (fullCover(subsetIndexes) && size < bestSoFar) {
             bestSoFar = size;
             std::cout << "(" << size << ") ";
-            for (int i = 0; i < MAX_SOL_SIZE; i++) {
+            for (int i = 0; i < MAX_SIZE; i++) {
                 if (subsetIndexes.at(i)) {
                     std::cout << i+1 << " ";
                 }
@@ -208,7 +207,7 @@ int main(int argc, char* argv[]) {
 
 	getSets(fileName.c_str());
 	printLabel("Input sets:");
-	for (std::vector<std::array<int, MAX_NUM> >::iterator I = sets.begin(),
+	for (std::vector<std::array<int, MAX_SIZE> >::iterator I = sets.begin(),
 			IE = sets.end(); I != IE; I++) {
 		std::cout << "(" << (I - sets.begin() + 1) << ") ";
 		printSet(*I);
@@ -216,11 +215,11 @@ int main(int argc, char* argv[]) {
 
 	printLabel("Results:");
 
-	std::array<int, MAX_SOL_SIZE> subsetIndexes;
+	std::array<int, MAX_SIZE> subsetIndexes;
 	subsetIndexes.fill(0);
-	std::array<int, MAX_NUM> covered;
+	std::array<int, MAX_SIZE> covered;
 	covered.fill(0);
-	bestSoFar = MAX_NUM;
+	bestSoFar = MAX_SIZE;
 	getMinimumSetCoverIndexes(0, subsetIndexes, covered);
 
 	return 0;
