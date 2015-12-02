@@ -80,18 +80,6 @@ bool fullCover(std::array<int, MAX_SIZE> subsetIndexes) {
 	return true;
 }
 
-
-//Calculate the number of sets being used in the set.
-int solutionSize(std::array<int, MAX_SIZE> subsetIndexes) {
-	int size = 0;
-
-	for (int i = 0; i < maxNum; i++) {
-		size += subsetIndexes.at(i);
-	}
-
-	return size;
-}
-
 //Create a hash for the current solution, insert it into a table.
 //Returns true if the solution has not yet been inserted, false
 //otherwise.
@@ -151,15 +139,10 @@ void getMinimumSetCoverIndexes(int index, int depth) {
 
     //Once we reach the end of the list.
     if (index == maxNum) {
-        // std::cout << "All numbers have been inserted into the cover." << std::endl;
-        //Calculate the size of this solution.
-        int size = solutionSize(subsetIndexes);
-        // std::cout << "Solution size: " << size << std::endl;
-
         //If this is the best cover so far, print it.
-        if (fullCover(subsetIndexes) && size < bestSoFar) {
-            bestSoFar = size;
-            std::cout << "(" << size << ") ";
+        if (fullCover(subsetIndexes)) {
+            bestSoFar = depth;
+            std::cout << "(" << depth << ") ";
             for (int i = 0; i < maxNum; i++) {
                 if (subsetIndexes.at(i)) {
                     std::cout << i+1 << " ";
