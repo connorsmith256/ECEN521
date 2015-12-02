@@ -72,32 +72,11 @@ void getSets(const char* fileName) {
 }
 
 bool fullCover(std::array<int, MAX_SIZE> subsetIndexes) {
-	std::array<int, MAX_SIZE> universalSet;
-	universalSet.fill(0);
-
 	for (int i = 0; i < maxNum; i++) {
-		if (subsetIndexes.at(i)) {
-			for (int j = 0; j < maxNum; j++) {
-				if (sets.at(i).at(j)) {
-					// std::cout << j << " ";
-					universalSet.at(j) = 1;
-				}
-			}
-			// std::cout << "\n";
-		}
-	}
-
-	// std::cout << "Cover: ";
-	for (int i = 0; i < maxNum; i++) {
-		if (!universalSet.at(i)) {
-			// std::cout << i << " not covered\n";
+		if (!covered.at(i)) {
 			return false;
 		}
-		else {
-			// std::cout << i << " ";
-		}
 	}
-	// std::cout << "\n";
 	return true;
 }
 
