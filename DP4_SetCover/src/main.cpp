@@ -14,6 +14,9 @@
 std::set<int> previousSolutions;
 std::hash<std::string> hash_func;
 std::vector<std::array<int, MAX_SIZE> > sets;
+std::array<int, MAX_SIZE> subsetIndexes;
+std::array<int, MAX_SIZE> covered;
+
 int maxNum;
 int numSets;
 int bestSoFar;
@@ -129,25 +132,23 @@ bool isNew(std::array<int, MAX_SIZE> solution) {
 }
 
 //Applies the selected subset to the covering set.
-void applySubset(std::array<int, MAX_SIZE> set, std::array<int, MAX_SIZE> &covered){
+void applySubset(int index, std::array<int, MAX_SIZE> &covered){
     for(int i = 0; i < maxNum; i++)
     {
-        covered.at(i) += set.at(i);
+        covered.at(i) += sets.at(index).at(i);
     }
 }
 
 //Unapplies the selected subset from the covering set.
-void unapplySubset(std::array<int, MAX_SIZE> set, std::array<int, MAX_SIZE> &covered){
+void unapplySubset(int index, std::array<int, MAX_SIZE> &covered){
     for(int i = 0; i < maxNum; i++)
     {
-        covered.at(i) -= set.at(i);;
+        covered.at(i) -= sets.at(index).at(i);;
     }
 }
 
 //Finds the minimum set cover for a universe.
-void getMinimumSetCoverIndexes(int index,
-		std::array<int, MAX_SIZE> subsetIndexes,
-		std::array<int, MAX_SIZE> covered, int depth) {
+void getMinimumSetCoverIndexes(int index, int depth) {
 
     // std::cout << "depth: " << depth << "\n";
     // printSet(subsetIndexes);
@@ -196,9 +197,9 @@ void getMinimumSetCoverIndexes(int index,
 		if (!subsetIndexes.at(i) && sets.at(i).at(index)) {
             // printSet(sets.at(i));
 			subsetIndexes.at(i) = 1;
-            applySubset(sets.at(i), covered);
-			getMinimumSetCoverIndexes(index+1, subsetIndexes, covered, depth+1);
-            unapplySubset(sets.at(i), covered);
+            applySubset(i, covered);
+			getMinimumSetCoverIndexes(index+1, depth+1);
+            unapplySubset(i, covered);
 			subsetIndexes.at(i) = 0;
 		}
         i++;
@@ -232,12 +233,10 @@ int main(int argc, char* argv[]) {
 	double start_time = get_current_time();
 
 	previousSolutions.clear();
-	std::array<int, MAX_SIZE> subsetIndexes;
 	subsetIndexes.fill(0);
-	std::array<int, MAX_SIZE> covered;
 	covered.fill(0);
 	bestSoFar = MAX_SIZE;
-	getMinimumSetCoverIndexes(0, subsetIndexes, covered, 0);
+	getMinimumSetCoverIndexes(0, 0);
 
 	double end_time = get_current_time();
 	std::cout << "Execution time (s): " << (end_time - start_time) << "\n";
