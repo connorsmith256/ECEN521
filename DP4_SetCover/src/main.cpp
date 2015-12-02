@@ -71,7 +71,7 @@ void getSets(const char* fileName) {
 	}
 }
 
-bool fullCover(std::array<int, MAX_SIZE> subsetIndexes) {
+bool fullCover() {
 	for (int i = 0; i < maxNum; i++) {
 		if (!covered.at(i)) {
 			return false;
@@ -99,7 +99,7 @@ bool isNew(std::array<int, MAX_SIZE> solution) {
 }
 
 //Applies the selected subset to the covering set.
-void applySubset(int index, std::array<int, MAX_SIZE> &covered){
+inline void applySubset(int index, std::array<int, MAX_SIZE> &covered){
     for(int i = 0; i < maxNum; i++)
     {
         covered.at(i) += sets.at(index).at(i);
@@ -107,7 +107,7 @@ void applySubset(int index, std::array<int, MAX_SIZE> &covered){
 }
 
 //Unapplies the selected subset from the covering set.
-void unapplySubset(int index, std::array<int, MAX_SIZE> &covered){
+inline void unapplySubset(int index, std::array<int, MAX_SIZE> &covered){
     for(int i = 0; i < maxNum; i++)
     {
         covered.at(i) -= sets.at(index).at(i);;
@@ -140,7 +140,7 @@ void getMinimumSetCoverIndexes(int index, int depth) {
     //Once we reach the end of the list.
     if (index == maxNum) {
         //If this is the best cover so far, print it.
-        if (fullCover(subsetIndexes)) {
+        if (fullCover()) {
             bestSoFar = depth;
             std::cout << "(" << depth << ") ";
             for (int i = 0; i < maxNum; i++) {
