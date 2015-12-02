@@ -121,14 +121,14 @@ void getMinimumSetCoverIndexes(int index, int depth) {
     // printSet(subsetIndexes);
     // printBitVector(covered);
 
-    //Do not continue if we've already looked at this solution.
-    if (index > 0 && !isNew(subsetIndexes)) {
-    	// std::cout << "Not new. Returning.\n";
+    //Don't try to find solutions worse than the best so far
+    if (depth >= bestSoFar) {
     	return;
     }
 
-    //Don't try to find solutions worse than the best so far
-    if (depth >= bestSoFar) {
+    //Do not continue if we've already looked at this solution.
+    if (index > 0 && !isNew(subsetIndexes)) {
+    	// std::cout << "Not new. Returning.\n";
     	return;
     }
 
@@ -154,8 +154,7 @@ void getMinimumSetCoverIndexes(int index, int depth) {
     }
 
     // std::cout << "Looking for a set containing: " << index+1 << std::endl;
-    int i = 0;
-    while(i < numSets){
+    for (int i = 0; i < numSets; i++){
 		if (!subsetIndexes.at(i) && sets.at(i).at(index)) {
             // printSet(sets.at(i));
 			subsetIndexes.at(i) = 1;
@@ -164,7 +163,6 @@ void getMinimumSetCoverIndexes(int index, int depth) {
             unapplySubset(i, covered);
 			subsetIndexes.at(i) = 0;
 		}
-        i++;
 	}
 }
 
