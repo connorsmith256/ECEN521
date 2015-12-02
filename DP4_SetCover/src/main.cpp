@@ -72,7 +72,7 @@ bool fullCover(std::array<int, MAX_SIZE> subsetIndexes) {
 	std::array<int, MAX_SIZE> universalSet;
 	universalSet.fill(0);
 
-	for (int i = 0; i < MAX_SIZE; i++) {
+	for (int i = 0; i < maxNum; i++) {
 		if (subsetIndexes.at(i)) {
 			for (int j = 0; j < maxNum; j++) {
 				if (sets.at(i).at(j)) {
@@ -103,7 +103,7 @@ bool fullCover(std::array<int, MAX_SIZE> subsetIndexes) {
 int solutionSize(std::array<int, MAX_SIZE> subsetIndexes) {
 	int size = 0;
 
-	for (int i = 0; i < MAX_SIZE; i++) {
+	for (int i = 0; i < maxNum; i++) {
 		size += subsetIndexes.at(i);
 	}
 
@@ -130,7 +130,7 @@ bool isNew(std::array<int, MAX_SIZE> solution) {
 
 //Applies the selected subset to the covering set.
 void applySubset(std::array<int, MAX_SIZE> set, std::array<int, MAX_SIZE> &covered){
-    for(int i = 0; i < MAX_SIZE; i++)
+    for(int i = 0; i < maxNum; i++)
     {
         covered.at(i) += set.at(i);
     }
@@ -138,7 +138,7 @@ void applySubset(std::array<int, MAX_SIZE> set, std::array<int, MAX_SIZE> &cover
 
 //Unapplies the selected subset from the covering set.
 void unapplySubset(std::array<int, MAX_SIZE> set, std::array<int, MAX_SIZE> &covered){
-    for(int i = 0; i < MAX_SIZE; i++)
+    for(int i = 0; i < maxNum; i++)
     {
         covered.at(i) -= set.at(i);;
     }
@@ -180,7 +180,7 @@ void getMinimumSetCoverIndexes(int index,
         if (fullCover(subsetIndexes) && size < bestSoFar) {
             bestSoFar = size;
             std::cout << "(" << size << ") ";
-            for (int i = 0; i < MAX_SIZE; i++) {
+            for (int i = 0; i < maxNum; i++) {
                 if (subsetIndexes.at(i)) {
                     std::cout << i+1 << " ";
                 }
