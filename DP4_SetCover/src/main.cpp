@@ -2,17 +2,17 @@
 #include <fstream>
 #include <functional>
 #include <iostream>
-#include <set>
 #include <stdio.h>
 #include <string>
 #include <sstream>
 #include <sys/time.h>
+#include <unordered_set>
 #include <vector>
 
 #define MAX_SIZE 1000
 
-std::set<int> previousSolutions;
-std::hash<std::string> hash_func;
+std::unordered_set<std::string> previousSolutions;
+std::hash<char*> hash_func;
 std::vector<std::array<int, MAX_SIZE> > sets;
 std::array<int, MAX_SIZE> subsetIndexes;
 std::array<int, MAX_SIZE> covered;
@@ -84,17 +84,18 @@ bool fullCover() {
 //Returns true if the solution has not yet been inserted, false
 //otherwise.
 bool isNew(std::array<int, MAX_SIZE> solution) {
-	std::string vecToString;
+	char vecToString[MAX_SIZE];
 	for (int i = 0; i < numSets; i++) {
-        vecToString += solution.at(i);
+        vecToString[i] = solution.at(i) + '0';
 	}
+	std::string newSolution(vecToString);
 
-	int hash = hash_func(vecToString);
-	bool exists = previousSolutions.find(hash) != previousSolutions.end();
+	bool exists = previousSolutions.count(newSolution) > 0;
 	if (exists) {
 		return false;
 	}
-	previousSolutions.insert(hash);
+
+	previousSolutions.insert(newSolution);
 	return true;
 }
 
